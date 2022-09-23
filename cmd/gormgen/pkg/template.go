@@ -45,6 +45,7 @@ func (t *{{.StructName}}) Create(db *gorm.DB) (id int32, err error) {
 }
 
 type {{.QueryBuilderName}} struct {
+	fields []string
 	order []string
 	where []struct {
 		prefix string
@@ -56,6 +57,9 @@ type {{.QueryBuilderName}} struct {
 
 func (qb *{{.QueryBuilderName}}) buildQuery(db *gorm.DB) *gorm.DB {
 	ret := db
+	if len(qb.fields) > 0 {
+		ret = ret.Select(qb.fields)
+	}
 	for _, where := range qb.where {
 		ret = ret.Where(where.prefix, where.value)
 	}
@@ -64,6 +68,11 @@ func (qb *{{.QueryBuilderName}}) buildQuery(db *gorm.DB) *gorm.DB {
 	}
 	ret = ret.Limit(qb.limit).Offset(qb.offset)
 	return ret
+}
+
+func (qb *{{.QueryBuilderName}}) Select(fields ...string) *{{.QueryBuilderName}} {
+	qb.fields = append(qb.fields, fields...)
+	return qb
 }
 
 func (qb *{{.QueryBuilderName}}) Updates(db *gorm.DB, m map[string]interface{}) (err error) {
