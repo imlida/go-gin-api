@@ -29,11 +29,13 @@ require (
 	github.com/vektah/gqlparser/v2 v2.2.0
 	go.uber.org/multierr v1.7.0
 	go.uber.org/zap v1.19.1
+	golang.org/x/sys v0.0.0-20221010170243-090e33056c14 // indirect
 	golang.org/x/time v0.0.0-20211116232009-f0f3c7e86c11
-	golang.org/x/tools v0.1.7
+	golang.org/x/tools v0.1.12
 	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0
-	gorm.io/driver/mysql v1.2.0
-	gorm.io/gorm v1.22.3
+	gorm.io/driver/mysql v1.4.1
+	gorm.io/gen v0.3.17 // indirect
+	gorm.io/gorm v1.24.0
 )
