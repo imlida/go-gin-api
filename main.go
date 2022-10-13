@@ -92,13 +92,11 @@ func main() {
 
 		// 关闭 db
 		func() {
-			if s.Db != nil {
-				if err := s.Db.DbWClose(); err != nil {
-					accessLogger.Error("dbw close err", zap.Error(err))
-				}
-
-				if err := s.Db.DbRClose(); err != nil {
-					accessLogger.Error("dbr close err", zap.Error(err))
+			if dbs := s.Db.GetDbs(); dbs != nil {
+				for _, db := range dbs {
+					if err := s.Db.DbClose(db); err != nil {
+						accessLogger.Error("db close err", zap.Error(err))
+					}
 				}
 			}
 		},

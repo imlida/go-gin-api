@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/fatih/structs"
 	"github.com/imlida/go-gin-api/configs"
 	"github.com/imlida/go-gin-api/pkg/errors"
 
@@ -29,62 +30,64 @@ var _ Repo = (*dbRepo)(nil)
 
 type Repo interface {
 	i()
-	GetDbR() *gorm.DB
-	GetDbW() *gorm.DB
-	DbRClose() error
-	DbWClose() error
+	GetDb(name string) *gorm.DB
+	DbClose(db *gorm.DB) error
+	GetDbs() map[string]*gorm.DB
 }
 
 type dbRepo struct {
-	DbR *gorm.DB
-	DbW *gorm.DB
+	Dbs map[string]*gorm.DB
 }
 
 func New() (Repo, error) {
 	cfg := configs.Get().MySQL
-	dbr, err := dbConnect(cfg.Read.User, cfg.Read.Pass, cfg.Read.Addr, cfg.Read.Name)
-	if err != nil {
-		return nil, err
-	}
+	configs := structs.Map(cfg)
 
-	dbw, err := dbConnect(cfg.Write.User, cfg.Write.Pass, cfg.Write.Addr, cfg.Write.Name)
-	if err != nil {
-		return nil, err
+	var dbs = make(map[string]*gorm.DB)
+	var db *gorm.DB
+	var err error
+
+	//遍历configs,连接数据库
+	for k, v := range configs {
+		addr := v.(map[string]interface{})["Addr"].(string)
+		user := v.(map[string]interface{})["User"].(string)
+		pass := v.(map[string]interface{})["Pass"].(string)
+		name := v.(map[string]interface{})["Name"].(string)
+		maxOpenConn := v.(map[string]interface{})["MaxOpenConn"].(int)
+		maxIdleConn := v.(map[string]interface{})["MaxIdleConn"].(int)
+		connMaxLifeTime := v.(map[string]interface{})["ConnMaxLifeTime"].(int)
+
+		db, err = dbConnect(user, pass, addr, name, maxOpenConn, maxIdleConn, time.Duration(connMaxLifeTime))
+		if err != nil {
+			return nil, err
+		}
+		dbs[k] = db
 	}
 
 	return &dbRepo{
-		DbR: dbr,
-		DbW: dbw,
+		Dbs: dbs,
 	}, nil
 }
 
 func (d *dbRepo) i() {}
 
-func (d *dbRepo) GetDbR() *gorm.DB {
-	return d.DbR
+func (d *dbRepo) GetDb(name string) *gorm.DB {
+	return d.Dbs[name]
 }
 
-func (d *dbRepo) GetDbW() *gorm.DB {
-	return d.DbW
-}
-
-func (d *dbRepo) DbRClose() error {
-	sqlDB, err := d.DbR.DB()
+func (d *dbRepo) DbClose(db *gorm.DB) error {
+	sqlDB, err := db.DB()
 	if err != nil {
 		return err
 	}
 	return sqlDB.Close()
 }
 
-func (d *dbRepo) DbWClose() error {
-	sqlDB, err := d.DbW.DB()
-	if err != nil {
-		return err
-	}
-	return sqlDB.Close()
+func (d *dbRepo) GetDbs() map[string]*gorm.DB {
+	return d.Dbs
 }
 
-func dbConnect(user, pass, addr, dbName string) (*gorm.DB, error) {
+func dbConnect(user, pass, addr, dbName string, maxOpenConn, maxIdleConn int, connMaxLifeTime time.Duration) (*gorm.DB, error) {
 	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8mb4&parseTime=%t&loc=%s",
 		user,
 		pass,
@@ -106,21 +109,19 @@ func dbConnect(user, pass, addr, dbName string) (*gorm.DB, error) {
 
 	db.Set("gorm:table_options", "CHARSET=utf8mb4")
 
-	cfg := configs.Get().MySQL.Base
-
 	sqlDB, err := db.DB()
 	if err != nil {
 		return nil, err
 	}
 
 	// 设置连接池 用于设置最大打开的连接数，默认值为0表示不限制.设置最大的连接数，可以避免并发太高导致连接mysql出现too many connections的错误。
-	sqlDB.SetMaxOpenConns(cfg.MaxOpenConn)
+	sqlDB.SetMaxOpenConns(maxOpenConn)
 
 	// 设置最大连接数 用于设置闲置的连接数.设置闲置的连接数则当开启的一个连接使用完成后可以放在池里等候下一次使用。
-	sqlDB.SetMaxIdleConns(cfg.MaxIdleConn)
+	sqlDB.SetMaxIdleConns(maxIdleConn)
 
 	// 设置最大连接超时
-	sqlDB.SetConnMaxLifetime(time.Minute * cfg.ConnMaxLifeTime)
+	sqlDB.SetConnMaxLifetime(time.Minute * connMaxLifeTime)
 
 	// 使用插件
 	db.Use(&TracePlugin{})

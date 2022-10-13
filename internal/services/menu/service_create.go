@@ -24,7 +24,7 @@ func (s *service) Create(ctx core.Context, menuData *CreateMenuData) (id int32, 
 	model.IsUsed = 1
 	model.IsDeleted = -1
 
-	id, err = model.Create(s.db.GetDbW().WithContext(ctx.RequestContext()))
+	id, err = model.Create(s.db.GetDb("Write").WithContext(ctx.RequestContext()))
 	if err != nil {
 		return 0, err
 	}

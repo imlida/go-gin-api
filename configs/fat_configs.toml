@@ -15,22 +15,23 @@
 
 [mysql]
 
-  [mysql.base]
-    connmaxlifetime = 60
-    maxidleconn = 60
-    maxopenconn = 10
-
   [mysql.read]
     addr = "127.0.0.1:3306"
-    name = "go_gin_api"
-    pass = "123456789"
-    user = "root"
+    name = "lida_gin_api"
+    pass = "password"
+    user = "root222"
+    connMaxLifeTime = 60
+    maxIdleConn = 60
+    maxOpenConn = 10
 
   [mysql.write]
     addr = "127.0.0.1:3306"
-    name = "go_gin_api"
-    pass = "123456789"
-    user = "root"
+    name = "lida_gin_api"
+    pass = "password"
+    user = "root333"
+    connMaxLifeTime = 60
+    maxIdleConn = 60
+    maxOpenConn = 10
 
 [redis]
   addr = "127.0.0.1:6379"

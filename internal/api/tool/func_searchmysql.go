@@ -140,7 +140,7 @@ func (h *handler) SearchMySQL() core.HandlerFunc {
 		}
 
 		// TODO 后期支持查询多个数据库
-		rows, err := h.db.GetDbR().Raw(sql).Rows()
+		rows, err := h.db.GetDb("Read").Raw(sql).Rows()
 		if err != nil {
 			c.AbortWithError(core.Error(
 				http.StatusBadRequest,
@@ -189,7 +189,7 @@ func (h *handler) SearchMySQL() core.HandlerFunc {
 		sqlTableColumn := fmt.Sprintf("SELECT `COLUMN_NAME`, `COLUMN_COMMENT` FROM `information_schema`.`columns` WHERE `table_schema`= '%s' AND `table_name`= '%s' ORDER BY `ORDINAL_POSITION` ASC",
 			req.DbName, req.TableName)
 
-		rows, err = h.db.GetDbR().Raw(sqlTableColumn).Rows()
+		rows, err = h.db.GetDb("Read").Raw(sqlTableColumn).Rows()
 		if err != nil {
 			c.AbortWithError(core.Error(
 				http.StatusBadRequest,

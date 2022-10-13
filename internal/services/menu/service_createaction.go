@@ -19,7 +19,7 @@ func (s *service) CreateAction(ctx core.Context, menuActionData *CreateMenuActio
 	model.CreatedUser = ctx.SessionUserInfo().UserName
 	model.IsDeleted = -1
 
-	id, err = model.Create(s.db.GetDbW().WithContext(ctx.RequestContext()))
+	id, err = model.Create(s.db.GetDb("Write").WithContext(ctx.RequestContext()))
 	if err != nil {
 		return 0, err
 	}

@@ -25,7 +25,7 @@ func (s *service) List(ctx core.Context, searchData *SearchData) (listData []*au
 
 	listData, err = qb.
 		OrderById(false).
-		QueryAll(s.db.GetDbR().WithContext(ctx.RequestContext()))
+		QueryAll(s.db.GetDb("Read").WithContext(ctx.RequestContext()))
 	if err != nil {
 		return nil, err
 	}

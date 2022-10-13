@@ -49,7 +49,7 @@ func (h *handler) View() core.HandlerFunc {
 
 	mysqlVer := new(mysqlVersion)
 	if h.db != nil {
-		h.db.GetDbR().Raw("SELECT version() as ver").Scan(mysqlVer)
+		h.db.GetDb("Read").Raw("SELECT version() as ver").Scan(mysqlVer)
 	}
 
 	redisVer := ""

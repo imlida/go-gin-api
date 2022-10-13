@@ -64,7 +64,7 @@ func (h *handler) UpgradeExecute() core.HandlerFunc {
 		}
 
 		outPutString := ""
-		db := h.db.GetDbW()
+		db := h.db.GetDb("Write")
 
 		if upgradeTableList[req.TableName] == nil {
 			ctx.AbortWithError(core.Error(

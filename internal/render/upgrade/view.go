@@ -31,7 +31,7 @@ func (h *handler) UpgradeView() core.HandlerFunc {
 
 		mysqlConf := configs.Get().MySQL.Read
 		sqlTables := fmt.Sprintf("SELECT `table_name`,`table_comment` FROM `information_schema`.`tables` WHERE `table_schema`= '%s'", mysqlConf.Name)
-		rows, err := h.db.GetDbR().Raw(sqlTables).Rows()
+		rows, err := h.db.GetDb("Read").Raw(sqlTables).Rows()
 		if err != nil {
 			c.HTML("upgrade_view", tableCollect)
 			return
