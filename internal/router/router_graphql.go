@@ -1,6 +1,6 @@
 package router
 
-import "github.com/xinliangnote/go-gin-api/internal/graph/handler"
+import "github.com/imlida/go-gin-api/internal/graph/handler"
 
 func setGraphQLRouter(r *resource) {
 	// graphQL 控制器

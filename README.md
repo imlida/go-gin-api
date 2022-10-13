@@ -32,14 +32,14 @@
 
 ## 文档索引
 
-- 中文文档：[go-gin-api - 语雀](https://www.yuque.com/xinliangnote/go-gin-api/ngc3x5)
-- English Document：[en.md](https://github.com/xinliangnote/go-gin-api/blob/master/en.md)
+- 中文文档：[go-gin-api - 语雀](https://www.yuque.com/imlida/go-gin-api/ngc3x5)
+- English Document：[en.md](https://github.com/imlida/go-gin-api/blob/master/en.md)
 
 ## 其他
 
-查看 Jaeger 链路追踪 Demo 代码，请查看 [v1.0 版](https://github.com/xinliangnote/go-gin-api/releases/tag/v1.0) ，链接地址：http://127.0.0.1:9999/jaeger_test
+查看 Jaeger 链路追踪 Demo 代码，请查看 [v1.0 版](https://github.com/imlida/go-gin-api/releases/tag/v1.0) ，链接地址：http://127.0.0.1:9999/jaeger_test
 
-调用的其他服务端 Demo 代码为 [https://github.com/xinliangnote/go-jaeger-demo](https://github.com/xinliangnote/go-jaeger-demo)
+调用的其他服务端 Demo 代码为 [https://github.com/imlida/go-jaeger-demo](https://github.com/imlida/go-jaeger-demo)
 
 ## 联系作者
 

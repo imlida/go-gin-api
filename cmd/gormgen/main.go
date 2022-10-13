@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/xinliangnote/go-gin-api/cmd/gormgen/pkg"
+	"github.com/imlida/go-gin-api/cmd/gormgen/pkg"
 )
 
 var (

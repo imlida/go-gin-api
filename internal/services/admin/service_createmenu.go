@@ -3,9 +3,9 @@ package admin
 import (
 	"strings"
 
-	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
-	"github.com/xinliangnote/go-gin-api/internal/repository/mysql"
-	"github.com/xinliangnote/go-gin-api/internal/repository/mysql/admin_menu"
+	"github.com/imlida/go-gin-api/internal/pkg/core"
+	"github.com/imlida/go-gin-api/internal/repository/mysql"
+	"github.com/imlida/go-gin-api/internal/repository/mysql/admin_menu"
 
 	"github.com/spf13/cast"
 )

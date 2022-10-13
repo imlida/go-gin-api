@@ -1,12 +1,12 @@
 package admin
 
 import (
-	"github.com/xinliangnote/go-gin-api/configs"
-	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
-	"github.com/xinliangnote/go-gin-api/internal/repository/mysql"
-	"github.com/xinliangnote/go-gin-api/internal/repository/redis"
-	"github.com/xinliangnote/go-gin-api/internal/services/admin"
-	"github.com/xinliangnote/go-gin-api/pkg/hash"
+	"github.com/imlida/go-gin-api/configs"
+	"github.com/imlida/go-gin-api/internal/pkg/core"
+	"github.com/imlida/go-gin-api/internal/repository/mysql"
+	"github.com/imlida/go-gin-api/internal/repository/redis"
+	"github.com/imlida/go-gin-api/internal/services/admin"
+	"github.com/imlida/go-gin-api/pkg/hash"
 
 	"go.uber.org/zap"
 )

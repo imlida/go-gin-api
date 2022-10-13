@@ -1,17 +1,17 @@
 package router
 
 import (
-	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
-	"github.com/xinliangnote/go-gin-api/internal/render/admin"
-	"github.com/xinliangnote/go-gin-api/internal/render/authorized"
-	"github.com/xinliangnote/go-gin-api/internal/render/config"
-	"github.com/xinliangnote/go-gin-api/internal/render/cron"
-	"github.com/xinliangnote/go-gin-api/internal/render/dashboard"
-	"github.com/xinliangnote/go-gin-api/internal/render/generator"
-	"github.com/xinliangnote/go-gin-api/internal/render/index"
-	"github.com/xinliangnote/go-gin-api/internal/render/install"
-	"github.com/xinliangnote/go-gin-api/internal/render/tool"
-	"github.com/xinliangnote/go-gin-api/internal/render/upgrade"
+	"github.com/imlida/go-gin-api/internal/pkg/core"
+	"github.com/imlida/go-gin-api/internal/render/admin"
+	"github.com/imlida/go-gin-api/internal/render/authorized"
+	"github.com/imlida/go-gin-api/internal/render/config"
+	"github.com/imlida/go-gin-api/internal/render/cron"
+	"github.com/imlida/go-gin-api/internal/render/dashboard"
+	"github.com/imlida/go-gin-api/internal/render/generator"
+	"github.com/imlida/go-gin-api/internal/render/index"
+	"github.com/imlida/go-gin-api/internal/render/install"
+	"github.com/imlida/go-gin-api/internal/render/tool"
+	"github.com/imlida/go-gin-api/internal/render/upgrade"
 )
 
 func setRenderRouter(r *resource) {

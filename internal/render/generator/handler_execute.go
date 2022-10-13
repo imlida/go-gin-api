@@ -8,7 +8,7 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
+	"github.com/imlida/go-gin-api/internal/pkg/core"
 )
 
 type handlerExecuteRequest struct {

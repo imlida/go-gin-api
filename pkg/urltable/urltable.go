@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/xinliangnote/go-gin-api/pkg/errors"
+	"github.com/imlida/go-gin-api/pkg/errors"
 )
 
 const (

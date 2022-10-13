@@ -1,16 +1,16 @@
 package router
 
 import (
-	"github.com/xinliangnote/go-gin-api/configs"
-	"github.com/xinliangnote/go-gin-api/internal/alert"
-	"github.com/xinliangnote/go-gin-api/internal/metrics"
-	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
-	"github.com/xinliangnote/go-gin-api/internal/repository/cron"
-	"github.com/xinliangnote/go-gin-api/internal/repository/mysql"
-	"github.com/xinliangnote/go-gin-api/internal/repository/redis"
-	"github.com/xinliangnote/go-gin-api/internal/router/interceptor"
-	"github.com/xinliangnote/go-gin-api/pkg/errors"
-	"github.com/xinliangnote/go-gin-api/pkg/file"
+	"github.com/imlida/go-gin-api/configs"
+	"github.com/imlida/go-gin-api/internal/alert"
+	"github.com/imlida/go-gin-api/internal/metrics"
+	"github.com/imlida/go-gin-api/internal/pkg/core"
+	"github.com/imlida/go-gin-api/internal/repository/cron"
+	"github.com/imlida/go-gin-api/internal/repository/mysql"
+	"github.com/imlida/go-gin-api/internal/repository/redis"
+	"github.com/imlida/go-gin-api/internal/router/interceptor"
+	"github.com/imlida/go-gin-api/pkg/errors"
+	"github.com/imlida/go-gin-api/pkg/file"
 
 	"go.uber.org/zap"
 )

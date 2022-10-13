@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/xinliangnote/go-gin-api/internal/graph/model"
+	"github.com/imlida/go-gin-api/internal/graph/model"
 
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/99designs/gqlgen/graphql/introspection"
@@ -232,7 +232,7 @@ func (ec *executionContext) field_Mutation_updateUserMobile_args(ctx context.Con
 	var arg0 model.UpdateUserMobileInput
 	if tmp, ok := rawArgs["data"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("data"))
-		arg0, err = ec.unmarshalNupdateUserMobileInput2githubᚗcomᚋxinliangnoteᚋgoᚑginᚑapiᚋinternalᚋgraphᚋmodelᚐUpdateUserMobileInput(ctx, tmp)
+		arg0, err = ec.unmarshalNupdateUserMobileInput2githubᚗcomᚋimlidaᚋgoᚑginᚑapiᚋinternalᚋgraphᚋmodelᚐUpdateUserMobileInput(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -345,7 +345,7 @@ func (ec *executionContext) _Mutation_updateUserMobile(ctx context.Context, fiel
 	}
 	res := resTmp.(*model.User)
 	fc.Result = res
-	return ec.marshalOUser2ᚖgithubᚗcomᚋxinliangnoteᚋgoᚑginᚑapiᚋinternalᚋgraphᚋmodelᚐUser(ctx, field.Selections, res)
+	return ec.marshalOUser2ᚖgithubᚗcomᚋimlidaᚋgoᚑginᚑapiᚋinternalᚋgraphᚋmodelᚐUser(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query_bySex(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
@@ -384,7 +384,7 @@ func (ec *executionContext) _Query_bySex(ctx context.Context, field graphql.Coll
 	}
 	res := resTmp.([]*model.User)
 	fc.Result = res
-	return ec.marshalOUser2ᚕᚖgithubᚗcomᚋxinliangnoteᚋgoᚑginᚑapiᚋinternalᚋgraphᚋmodelᚐUserᚄ(ctx, field.Selections, res)
+	return ec.marshalOUser2ᚕᚖgithubᚗcomᚋimlidaᚋgoᚑginᚑapiᚋinternalᚋgraphᚋmodelᚐUserᚄ(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query___type(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
@@ -2165,7 +2165,7 @@ func (ec *executionContext) marshalNString2string(ctx context.Context, sel ast.S
 	return res
 }
 
-func (ec *executionContext) marshalNUser2ᚖgithubᚗcomᚋxinliangnoteᚋgoᚑginᚑapiᚋinternalᚋgraphᚋmodelᚐUser(ctx context.Context, sel ast.SelectionSet, v *model.User) graphql.Marshaler {
+func (ec *executionContext) marshalNUser2ᚖgithubᚗcomᚋimlidaᚋgoᚑginᚑapiᚋinternalᚋgraphᚋmodelᚐUser(ctx context.Context, sel ast.SelectionSet, v *model.User) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -2432,7 +2432,7 @@ func (ec *executionContext) marshalN__TypeKind2string(ctx context.Context, sel a
 	return res
 }
 
-func (ec *executionContext) unmarshalNupdateUserMobileInput2githubᚗcomᚋxinliangnoteᚋgoᚑginᚑapiᚋinternalᚋgraphᚋmodelᚐUpdateUserMobileInput(ctx context.Context, v interface{}) (model.UpdateUserMobileInput, error) {
+func (ec *executionContext) unmarshalNupdateUserMobileInput2githubᚗcomᚋimlidaᚋgoᚑginᚑapiᚋinternalᚋgraphᚋmodelᚐUpdateUserMobileInput(ctx context.Context, v interface{}) (model.UpdateUserMobileInput, error) {
 	res, err := ec.unmarshalInputupdateUserMobileInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
@@ -2485,7 +2485,7 @@ func (ec *executionContext) marshalOString2ᚖstring(ctx context.Context, sel as
 	return graphql.MarshalString(*v)
 }
 
-func (ec *executionContext) marshalOUser2ᚕᚖgithubᚗcomᚋxinliangnoteᚋgoᚑginᚑapiᚋinternalᚋgraphᚋmodelᚐUserᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.User) graphql.Marshaler {
+func (ec *executionContext) marshalOUser2ᚕᚖgithubᚗcomᚋimlidaᚋgoᚑginᚑapiᚋinternalᚋgraphᚋmodelᚐUserᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.User) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
@@ -2512,7 +2512,7 @@ func (ec *executionContext) marshalOUser2ᚕᚖgithubᚗcomᚋxinliangnoteᚋgo�
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalNUser2ᚖgithubᚗcomᚋxinliangnoteᚋgoᚑginᚑapiᚋinternalᚋgraphᚋmodelᚐUser(ctx, sel, v[i])
+			ret[i] = ec.marshalNUser2ᚖgithubᚗcomᚋimlidaᚋgoᚑginᚑapiᚋinternalᚋgraphᚋmodelᚐUser(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -2532,7 +2532,7 @@ func (ec *executionContext) marshalOUser2ᚕᚖgithubᚗcomᚋxinliangnoteᚋgo�
 	return ret
 }
 
-func (ec *executionContext) marshalOUser2ᚖgithubᚗcomᚋxinliangnoteᚋgoᚑginᚑapiᚋinternalᚋgraphᚋmodelᚐUser(ctx context.Context, sel ast.SelectionSet, v *model.User) graphql.Marshaler {
+func (ec *executionContext) marshalOUser2ᚖgithubᚗcomᚋimlidaᚋgoᚑginᚑapiᚋinternalᚋgraphᚋmodelᚐUser(ctx context.Context, sel ast.SelectionSet, v *model.User) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}

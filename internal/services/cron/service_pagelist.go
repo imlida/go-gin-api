@@ -1,9 +1,9 @@
 package cron
 
 import (
-	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
-	"github.com/xinliangnote/go-gin-api/internal/repository/mysql"
-	"github.com/xinliangnote/go-gin-api/internal/repository/mysql/cron_task"
+	"github.com/imlida/go-gin-api/internal/pkg/core"
+	"github.com/imlida/go-gin-api/internal/repository/mysql"
+	"github.com/imlida/go-gin-api/internal/repository/mysql/cron_task"
 )
 
 type SearchData struct {

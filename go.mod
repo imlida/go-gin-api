@@ -1,4 +1,4 @@
-module github.com/xinliangnote/go-gin-api
+module github.com/imlida/go-gin-api
 
 go 1.16
 
@@ -36,6 +36,6 @@ require (
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0
 	gorm.io/driver/mysql v1.4.1
-	gorm.io/gen v0.3.17 // indirect
+	gorm.io/gen v0.3.17
 	gorm.io/gorm v1.24.0
 )

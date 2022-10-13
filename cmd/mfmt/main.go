@@ -15,7 +15,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/xinliangnote/go-gin-api/pkg/errors"
+	"github.com/imlida/go-gin-api/pkg/errors"
 
 	"go.uber.org/zap"
 	"golang.org/x/tools/go/packages"

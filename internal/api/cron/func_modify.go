@@ -3,10 +3,10 @@ package cron
 import (
 	"net/http"
 
-	"github.com/xinliangnote/go-gin-api/internal/code"
-	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
-	"github.com/xinliangnote/go-gin-api/internal/pkg/validation"
-	"github.com/xinliangnote/go-gin-api/internal/services/cron"
+	"github.com/imlida/go-gin-api/internal/code"
+	"github.com/imlida/go-gin-api/internal/pkg/core"
+	"github.com/imlida/go-gin-api/internal/pkg/validation"
+	"github.com/imlida/go-gin-api/internal/services/cron"
 )
 
 type modifyRequest struct {

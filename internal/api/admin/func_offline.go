@@ -3,11 +3,11 @@ package admin
 import (
 	"net/http"
 
-	"github.com/xinliangnote/go-gin-api/configs"
-	"github.com/xinliangnote/go-gin-api/internal/code"
-	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
-	"github.com/xinliangnote/go-gin-api/internal/pkg/password"
-	"github.com/xinliangnote/go-gin-api/internal/repository/redis"
+	"github.com/imlida/go-gin-api/configs"
+	"github.com/imlida/go-gin-api/internal/code"
+	"github.com/imlida/go-gin-api/internal/pkg/core"
+	"github.com/imlida/go-gin-api/internal/pkg/password"
+	"github.com/imlida/go-gin-api/internal/repository/redis"
 )
 
 type offlineRequest struct {

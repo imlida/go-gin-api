@@ -3,8 +3,8 @@ package generator_handler
 import (
 	"fmt"
 
-	"github.com/xinliangnote/go-gin-api/configs"
-	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
+	"github.com/imlida/go-gin-api/configs"
+	"github.com/imlida/go-gin-api/internal/pkg/core"
 
 	"go.uber.org/zap"
 )

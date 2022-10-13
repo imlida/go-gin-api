@@ -22,7 +22,7 @@ func TestMarshalJSON(t *testing.T) {
 	msg.Mobile = Mobile("13288887986")
 	msg.IDCard = IDCard("125252525252525252")
 	msg.PassWord = PassWord("123456")
-	msg.Email = Email("xinliangnote@163.com")
+	msg.Email = Email("imlida@163.com")
 	msg.BankCard1 = BankCard("6545654565456545")
 	msg.BankCard2 = BankCard("65485269874569852")
 	msg.BankCard3 = BankCard("6548526987456985298")

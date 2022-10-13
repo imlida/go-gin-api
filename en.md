@@ -26,7 +26,7 @@ Features:
 
 ## Index
 
-**Detailed documentation：[https://www.yuque.com/xinliangnote/go-gin-api/ngc3x5](https://www.yuque.com/xinliangnote/go-gin-api/ngc3x5)**
+**Detailed documentation：[https://www.yuque.com/imlida/go-gin-api/ngc3x5](https://www.yuque.com/imlida/go-gin-api/ngc3x5)**
 
 ## Contributing
 

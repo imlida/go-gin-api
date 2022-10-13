@@ -8,7 +8,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/xinliangnote/go-gin-api/cmd/mysqlmd/mysql"
+	"github.com/imlida/go-gin-api/cmd/mysqlmd/mysql"
 
 	"gorm.io/gorm"
 )

@@ -20,7 +20,7 @@ type message struct {
 }
 
 msg := new(message)
-msg.Email = ddm.Email("xinliangnote@163.com")
+msg.Email = ddm.Email("imlida@163.com")
 ...
 
 ```
