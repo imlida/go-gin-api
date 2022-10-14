@@ -18,25 +18,14 @@ import (
 var config = new(Config)
 
 type Config struct {
-	MySQL struct {
-		Read struct {
-			Addr            string        `toml:"addr"`
-			User            string        `toml:"user"`
-			Pass            string        `toml:"pass"`
-			Name            string        `toml:"name"`
-			MaxOpenConn     int           `toml:"maxOpenConn"`
-			MaxIdleConn     int           `toml:"maxIdleConn"`
-			ConnMaxLifeTime time.Duration `toml:"connMaxLifeTime"`
-		} `toml:"read"`
-		Write struct {
-			Addr            string        `toml:"addr"`
-			User            string        `toml:"user"`
-			Pass            string        `toml:"pass"`
-			Name            string        `toml:"name"`
-			MaxOpenConn     int           `toml:"maxOpenConn"`
-			MaxIdleConn     int           `toml:"maxIdleConn"`
-			ConnMaxLifeTime time.Duration `toml:"connMaxLifeTime"`
-		} `toml:"write"`
+	MySQL map[string]struct {
+		Addr            string        `toml:"addr"`
+		User            string        `toml:"user"`
+		Pass            string        `toml:"pass"`
+		Name            string        `toml:"name"`
+		MaxOpenConn     int           `toml:"maxOpenConn"`
+		MaxIdleConn     int           `toml:"maxIdleConn"`
+		ConnMaxLifeTime time.Duration `toml:"connMaxLifeTime"`
 	} `toml:"mysql"`
 
 	Redis struct {

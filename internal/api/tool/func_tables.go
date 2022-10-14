@@ -48,7 +48,7 @@ func (h *handler) Tables() core.HandlerFunc {
 		sqlTables := fmt.Sprintf("SELECT `table_name`,`table_comment` FROM `information_schema`.`tables` WHERE `table_schema`= '%s'", req.DbName)
 
 		// TODO 后期支持查询多个数据库
-		rows, err := h.db.GetDb("Read").Raw(sqlTables).Rows()
+		rows, err := h.db.GetDb("default").Raw(sqlTables).Rows()
 		if err != nil {
 			c.AbortWithError(core.Error(
 				http.StatusBadRequest,

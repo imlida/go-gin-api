@@ -11,7 +11,7 @@ func (s *service) Detail(ctx core.Context, id int32) (info *authorized.Authorize
 	qb.WhereIsDeleted(mysql.EqualPredicate, -1)
 	qb.WhereId(mysql.EqualPredicate, id)
 
-	info, err = qb.First(s.db.GetDb("Read").WithContext(ctx.RequestContext()))
+	info, err = qb.First(s.db.GetDb("default").WithContext(ctx.RequestContext()))
 	if err != nil {
 		return nil, err
 	}

@@ -1,3 +1,7 @@
+/*
+ * @Author: lida lidaemail@qq.com
+ * @LastEditors: lida lidaemail@qq.com
+ */
 package upgrade
 
 import (
@@ -29,9 +33,9 @@ func (h *handler) UpgradeView() core.HandlerFunc {
 
 		var tableCollect []tableInfo
 
-		mysqlConf := configs.Get().MySQL.Read
+		mysqlConf := configs.Get().MySQL["default"]
 		sqlTables := fmt.Sprintf("SELECT `table_name`,`table_comment` FROM `information_schema`.`tables` WHERE `table_schema`= '%s'", mysqlConf.Name)
-		rows, err := h.db.GetDb("Read").Raw(sqlTables).Rows()
+		rows, err := h.db.GetDb("default").Raw(sqlTables).Rows()
 		if err != nil {
 			c.HTML("upgrade_view", tableCollect)
 			return

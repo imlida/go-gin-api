@@ -1,3 +1,7 @@
+/*
+ * @Author: lida lidaemail@qq.com
+ * @LastEditors: lida lidaemail@qq.com
+ */
 package generator_handler
 
 import (
@@ -29,7 +33,7 @@ func (h *handler) GormExecute() core.HandlerFunc {
 			return
 		}
 
-		mysqlConf := configs.Get().MySQL.Read
+		mysqlConf := configs.Get().MySQL["default"]
 		shellPath := fmt.Sprintf("%s %s %s %s %s %s", gormgenSh, mysqlConf.Addr, mysqlConf.User, mysqlConf.Pass, mysqlConf.Name, req.Tables)
 		batPath := fmt.Sprintf("%s %s %s %s %s %s", gormgenBat, mysqlConf.Addr, mysqlConf.User, mysqlConf.Pass, mysqlConf.Name, req.Tables)
 

@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/fatih/structs"
 	"github.com/imlida/go-gin-api/configs"
 	"github.com/imlida/go-gin-api/pkg/errors"
 
@@ -41,23 +40,15 @@ type dbRepo struct {
 
 func New() (Repo, error) {
 	cfg := configs.Get().MySQL
-	configs := structs.Map(cfg)
-
+	fmt.Printf("cfg: %v\n", cfg)
+	// fmt.Printf("configs: %v\n", configs)
 	var dbs = make(map[string]*gorm.DB)
 	var db *gorm.DB
 	var err error
 
 	//遍历configs,连接数据库
-	for k, v := range configs {
-		addr := v.(map[string]interface{})["Addr"].(string)
-		user := v.(map[string]interface{})["User"].(string)
-		pass := v.(map[string]interface{})["Pass"].(string)
-		name := v.(map[string]interface{})["Name"].(string)
-		maxOpenConn := v.(map[string]interface{})["MaxOpenConn"].(int)
-		maxIdleConn := v.(map[string]interface{})["MaxIdleConn"].(int)
-		connMaxLifeTime := v.(map[string]interface{})["ConnMaxLifeTime"].(int)
-
-		db, err = dbConnect(user, pass, addr, name, maxOpenConn, maxIdleConn, time.Duration(connMaxLifeTime))
+	for k, v := range cfg {
+		db, err = dbConnect(v.User, v.Pass, v.Addr, v.Name, v.MaxOpenConn, v.MaxIdleConn, v.ConnMaxLifeTime)
 		if err != nil {
 			return nil, err
 		}

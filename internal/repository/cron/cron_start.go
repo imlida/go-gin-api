@@ -1,3 +1,7 @@
+/*
+ * @Author: lida lidaemail@qq.com
+ * @LastEditors: lida lidaemail@qq.com
+ */
 package cron
 
 import (
@@ -16,7 +20,7 @@ func (s *server) Start() {
 
 	qb := cron_task.NewQueryBuilder()
 	qb.WhereIsUsed(mysql.EqualPredicate, cron_task.IsUsedYES)
-	totalNum, err := qb.Count(s.db.GetDb("Read"))
+	totalNum, err := qb.Count(s.db.GetDb("default"))
 	if err != nil {
 		s.logger.Fatal("cron initialize tasks count err", zap.Error(err))
 	}
@@ -34,7 +38,7 @@ func (s *server) Start() {
 			Limit(pageSize).
 			Offset((page - 1) * pageSize).
 			OrderById(false).
-			QueryAll(s.db.GetDb("Read"))
+			QueryAll(s.db.GetDb("default"))
 		if err != nil {
 			s.logger.Fatal("cron initialize tasks list err", zap.Error(err))
 		}

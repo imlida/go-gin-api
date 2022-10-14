@@ -15,11 +15,11 @@
 
 [mysql]
 
-  [mysql.read]
+  [mysql.default]
     addr = "127.0.0.1:3306"
     name = "lida_gin_api"
     pass = "password"
-    user = "root222"
+    user = "root"
     connMaxLifeTime = 60
     maxIdleConn = 60
     maxOpenConn = 10
@@ -28,7 +28,7 @@
     addr = "127.0.0.1:3306"
     name = "lida_gin_api"
     pass = "password"
-    user = "root333"
+    user = "root"
     connMaxLifeTime = 60
     maxIdleConn = 60
     maxOpenConn = 10

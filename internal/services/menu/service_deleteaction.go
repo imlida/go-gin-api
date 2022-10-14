@@ -13,7 +13,7 @@ func (s *service) DeleteAction(ctx core.Context, id int32) (err error) {
 	_, err = menu_action.NewQueryBuilder().
 		WhereIsDeleted(mysql.EqualPredicate, -1).
 		WhereId(mysql.EqualPredicate, id).
-		First(s.db.GetDb("Read").WithContext(ctx.RequestContext()))
+		First(s.db.GetDb("default").WithContext(ctx.RequestContext()))
 
 	if err == gorm.ErrRecordNotFound {
 		return nil

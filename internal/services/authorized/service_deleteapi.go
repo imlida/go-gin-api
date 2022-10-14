@@ -15,7 +15,7 @@ func (s *service) DeleteAPI(ctx core.Context, id int32) (err error) {
 	authorizedApiInfo, err := authorized_api.NewQueryBuilder().
 		WhereIsDeleted(mysql.EqualPredicate, -1).
 		WhereId(mysql.EqualPredicate, id).
-		First(s.db.GetDb("Read").WithContext(ctx.RequestContext()))
+		First(s.db.GetDb("default").WithContext(ctx.RequestContext()))
 
 	if err == gorm.ErrRecordNotFound {
 		return nil

@@ -23,7 +23,7 @@ func (s *service) ListMenu(ctx core.Context, searchData *SearchListMenuData) (me
 	menuQb.WhereIsDeleted(mysql.EqualPredicate, -1)
 	menuListData, err := menuQb.
 		OrderBySort(true).
-		QueryAll(s.db.GetDb("Read").WithContext(ctx.RequestContext()))
+		QueryAll(s.db.GetDb("default").WithContext(ctx.RequestContext()))
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ func (s *service) ListMenu(ctx core.Context, searchData *SearchListMenuData) (me
 
 	adminMenuListData, err := adminMenuQb.
 		OrderById(false).
-		QueryAll(s.db.GetDb("Read").WithContext(ctx.RequestContext()))
+		QueryAll(s.db.GetDb("default").WithContext(ctx.RequestContext()))
 	if err != nil {
 		return nil, err
 	}

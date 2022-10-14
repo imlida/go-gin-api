@@ -29,7 +29,7 @@ func (h *handler) Dbs() core.HandlerFunc {
 
 		// TODO 后期支持查询多个数据库
 		data := dbData{
-			DbName: configs.Get().MySQL.Read.Name,
+			DbName: configs.Get().MySQL["default"].Name,
 		}
 
 		res.List = append(res.List, data)
