@@ -47,7 +47,7 @@ func New() (Repo, error) {
 
 	//遍历cfg,连接数据库
 	for k, v := range cfg {
-		db, err = dbConnect(v.User, v.Pass, v.Addr, v.Name, v.MaxOpenConn, v.MaxIdleConn, v.ConnMaxLifeTime)
+		db, err = dbConnect(v.User, v.Pass, v.Addr, v.Name, v.Charset, v.MaxOpenConn, v.MaxIdleConn, v.ConnMaxLifeTime)
 		if err != nil {
 			return nil, err
 		}
@@ -77,12 +77,13 @@ func (d *dbRepo) GetDbs() map[string]*gorm.DB {
 	return d.Dbs
 }
 
-func dbConnect(user, pass, addr, dbName string, maxOpenConn, maxIdleConn int, connMaxLifeTime time.Duration) (*gorm.DB, error) {
-	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8mb4&parseTime=%t&loc=%s",
+func dbConnect(user, pass, addr, dbName, dbCharset string, maxOpenConn, maxIdleConn int, connMaxLifeTime time.Duration) (*gorm.DB, error) {
+	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=%s&parseTime=%t&loc=%s",
 		user,
 		pass,
 		addr,
 		dbName,
+		dbCharset,
 		true,
 		"Local")
 
@@ -97,7 +98,7 @@ func dbConnect(user, pass, addr, dbName string, maxOpenConn, maxIdleConn int, co
 		return nil, errors.Wrap(err, fmt.Sprintf("[db connection failed] Database name: %s", dbName))
 	}
 
-	db.Set("gorm:table_options", "CHARSET=utf8mb4")
+	db.Set("gorm:table_options", "CHARSET="+dbCharset)
 
 	sqlDB, err := db.DB()
 	if err != nil {

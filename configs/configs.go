@@ -23,6 +23,7 @@ type Config struct {
 		User            string        `toml:"user"`
 		Pass            string        `toml:"pass"`
 		Name            string        `toml:"name"`
+		Charset         string        `toml:"charset"`
 		MaxOpenConn     int           `toml:"maxOpenConn"`
 		MaxIdleConn     int           `toml:"maxIdleConn"`
 		ConnMaxLifeTime time.Duration `toml:"connMaxLifeTime"`

@@ -36,7 +36,7 @@ func (h *handler) GormExecute() core.HandlerFunc {
 		dbReq := req.Db
 		dbCfg := strings.Split(dbReq, "|")
 		mysqlConf := configs.Get().MySQL[strings.TrimSpace(dbCfg[0])]
-		dsn := fmt.Sprintf("%s:%s@(%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", mysqlConf.User, mysqlConf.Pass, mysqlConf.Addr, mysqlConf.Name)
+		dsn := fmt.Sprintf("%s:%s@(%s)/%s?charset=%s&parseTime=True&loc=Local", mysqlConf.User, mysqlConf.Pass, mysqlConf.Addr, mysqlConf.Name, mysqlConf.Charset)
 
 		// specify the output directory (default: "./query")
 		// ### if you want to query without context constrain, set mode gen.WithoutContext ###

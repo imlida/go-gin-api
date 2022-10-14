@@ -1,3 +1,7 @@
+/*
+ * @Author: lida lidaemail@qq.com
+ * @LastEditors: lida lidaemail@qq.com
+ */
 package mysql
 
 import (
@@ -22,12 +26,13 @@ type dbRepo struct {
 	DbConn *gorm.DB
 }
 
-func New(dbAddr, dbUser, dbPass, dbName string) (Repo, error) {
-	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8mb4&parseTime=%t&loc=%s",
+func New(dbAddr, dbUser, dbPass, dbName, dbCharset string) (Repo, error) {
+	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=%s&parseTime=%t&loc=%s",
 		dbUser,
 		dbPass,
 		dbAddr,
 		dbName,
+		dbCharset,
 		true,
 		"Local")
 

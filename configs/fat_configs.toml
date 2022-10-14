@@ -20,6 +20,7 @@
     name = "lida_gin_api"
     pass = "password"
     user = "root"
+    charset = "utf8mb4"
     connMaxLifeTime = 60
     maxIdleConn = 60
     maxOpenConn = 10
@@ -29,6 +30,7 @@
     name = "lida_gin_api"
     pass = "password"
     user = "root"
+    charset = "utf8mb4"
     connMaxLifeTime = 60
     maxIdleConn = 60
     maxOpenConn = 10
