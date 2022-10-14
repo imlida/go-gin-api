@@ -37,7 +37,7 @@
 
 ## 其他
 
-查看 Jaeger 链路追踪 Demo 代码，请查看 [v1.0 版](https://github.com/imlida/go-gin-api/releases/tag/v1.0) ，链接地址：http://127.0.0.1:9999/jaeger_test
+查看 Jaeger 链路追踪 Demo 代码，请查看 [v1.0 版](https://github.com/imlida/go-gin-api/releases/tag/v1.0) ，链接地址：http://127.0.0.1:9000/jaeger_test
 
 调用的其他服务端 Demo 代码为 [https://github.com/imlida/go-jaeger-demo](https://github.com/imlida/go-jaeger-demo)
 

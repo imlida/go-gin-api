@@ -1,3 +1,7 @@
+/*
+ * @Author: lida lidaemail@qq.com
+ * @LastEditors: lida lidaemail@qq.com
+ */
 package configs
 
 import "time"
@@ -16,7 +20,7 @@ const (
 	ProjectDomain = "http://127.0.0.1"
 
 	// ProjectPort 项目端口
-	ProjectPort = ":9999"
+	ProjectPort = ":9000"
 
 	// ProjectAccessLogFile 项目访问日志存放文件
 	ProjectAccessLogFile = "./logs/" + ProjectName + "-access.log"
