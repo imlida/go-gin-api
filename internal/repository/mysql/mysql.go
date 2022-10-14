@@ -40,13 +40,12 @@ type dbRepo struct {
 
 func New() (Repo, error) {
 	cfg := configs.Get().MySQL
-	fmt.Printf("cfg: %v\n", cfg)
-	// fmt.Printf("configs: %v\n", configs)
+
 	var dbs = make(map[string]*gorm.DB)
 	var db *gorm.DB
 	var err error
 
-	//遍历configs,连接数据库
+	//遍历cfg,连接数据库
 	for k, v := range cfg {
 		db, err = dbConnect(v.User, v.Pass, v.Addr, v.Name, v.MaxOpenConn, v.MaxIdleConn, v.ConnMaxLifeTime)
 		if err != nil {
