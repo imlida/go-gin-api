@@ -1,8 +1,13 @@
+/*
+ * @Author: lida lidaemail@qq.com
+ * @LastEditors: lida lidaemail@qq.com
+ */
 package tool
 
 import (
 	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/imlida/go-gin-api/internal/code"
 	"github.com/imlida/go-gin-api/internal/pkg/core"
@@ -45,10 +50,13 @@ func (h *handler) Tables() core.HandlerFunc {
 			return
 		}
 
-		sqlTables := fmt.Sprintf("SELECT `table_name`,`table_comment` FROM `information_schema`.`tables` WHERE `table_schema`= '%s'", req.DbName)
+		//分割字符串
+		dbName := strings.Split(req.DbName, "|")
+
+		sqlTables := fmt.Sprintf("SELECT `table_name`,`table_comment` FROM `information_schema`.`tables` WHERE `table_schema`= '%s'", strings.TrimSpace(dbName[1]))
 
 		// TODO 后期支持查询多个数据库
-		rows, err := h.db.GetDb("default").Raw(sqlTables).Rows()
+		rows, err := h.db.GetDb(strings.TrimSpace(dbName[0])).Raw(sqlTables).Rows()
 		if err != nil {
 			c.AbortWithError(core.Error(
 				http.StatusBadRequest,

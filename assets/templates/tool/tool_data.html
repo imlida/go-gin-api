@@ -274,6 +274,7 @@
                 function () {
                 },
                 function (data) {
+                    $("#table").html("");
                     $.each(data.list, function (index, value) {
                         $("#table").append("<option value='" + value.table_name + "' data-subtext='" + value.table_comment + "'>" + value.table_name + "</option>");
                     });

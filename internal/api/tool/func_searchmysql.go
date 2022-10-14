@@ -139,8 +139,11 @@ func (h *handler) SearchMySQL() core.HandlerFunc {
 			sql += " LIMIT 100"
 		}
 
+		mysqlCfg := strings.Split(req.DbName, "|")
+		mysqlCon := strings.TrimSpace(mysqlCfg[0])
+
 		// TODO 后期支持查询多个数据库
-		rows, err := h.db.GetDb("default").Raw(sql).Rows()
+		rows, err := h.db.GetDb(mysqlCon).Raw(sql).Rows()
 		if err != nil {
 			c.AbortWithError(core.Error(
 				http.StatusBadRequest,
@@ -189,7 +192,7 @@ func (h *handler) SearchMySQL() core.HandlerFunc {
 		sqlTableColumn := fmt.Sprintf("SELECT `COLUMN_NAME`, `COLUMN_COMMENT` FROM `information_schema`.`columns` WHERE `table_schema`= '%s' AND `table_name`= '%s' ORDER BY `ORDINAL_POSITION` ASC",
 			req.DbName, req.TableName)
 
-		rows, err = h.db.GetDb("default").Raw(sqlTableColumn).Rows()
+		rows, err = h.db.GetDb(mysqlCon).Raw(sqlTableColumn).Rows()
 		if err != nil {
 			c.AbortWithError(core.Error(
 				http.StatusBadRequest,

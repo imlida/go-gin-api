@@ -1,6 +1,8 @@
 package tool
 
 import (
+	"fmt"
+
 	"github.com/imlida/go-gin-api/configs"
 	"github.com/imlida/go-gin-api/internal/pkg/core"
 )
@@ -27,12 +29,19 @@ func (h *handler) Dbs() core.HandlerFunc {
 	return func(c core.Context) {
 		res := new(dbsResponse)
 
-		// TODO 后期支持查询多个数据库
-		data := dbData{
-			DbName: configs.Get().MySQL["default"].Name,
+		dbs := configs.Get().MySQL
+		for k, db := range dbs {
+			res.List = append(res.List, dbData{
+				DbName: fmt.Sprintf("%s | %s", k, db.Name),
+			})
 		}
 
-		res.List = append(res.List, data)
+		// TODO 后期支持查询多个数据库
+		// data := dbData{
+		// 	DbName: configs.Get().MySQL["default"].Name,
+		// }
+
+		// res.List = append(res.List, data)
 		c.Payload(res)
 	}
 }
