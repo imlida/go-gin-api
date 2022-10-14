@@ -27,7 +27,7 @@ func (s *service) UpdateUsed(ctx core.Context, id int32, used int32) (err error)
 
 	qb := authorized.NewQueryBuilder()
 	qb.WhereId(mysql.EqualPredicate, id)
-	err = qb.Updates(s.db.GetDb("Write").WithContext(ctx.RequestContext()), data)
+	err = qb.Updates(s.db.GetDb("default").WithContext(ctx.RequestContext()), data)
 	if err != nil {
 		return err
 	}

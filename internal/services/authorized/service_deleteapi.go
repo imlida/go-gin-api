@@ -28,7 +28,7 @@ func (s *service) DeleteAPI(ctx core.Context, id int32) (err error) {
 
 	qb := authorized_api.NewQueryBuilder()
 	qb.WhereId(mysql.EqualPredicate, id)
-	err = qb.Updates(s.db.GetDb("Write").WithContext(ctx.RequestContext()), data)
+	err = qb.Updates(s.db.GetDb("default").WithContext(ctx.RequestContext()), data)
 	if err != nil {
 		return err
 	}
