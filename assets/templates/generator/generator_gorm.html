@@ -1,91 +1,153 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<link href="/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="/assets/bootstrap/js/jquery-confirm/jquery-confirm.min.css" rel="stylesheet">
-<link href="/assets/bootstrap/css/style.min.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <link href="/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/bootstrap/js/jquery-confirm/jquery-confirm.min.css" rel="stylesheet">
+  <link href="/assets/bootstrap/css/style.min.css" rel="stylesheet">
+  <link href="/assets/bootstrap/js/bootstrap-select/bootstrap-select.css" rel="stylesheet">
 </head>
-  
+
 <body>
-<div class="container-fluid p-t-15">
-  <div class="row">
-    <div class="col-lg-6">
-      <div class="card">
-        <header class="card-header"><div class="card-title"> 生成数据表 CURD </div></header>
-        <div class="card-body">
-          <div class="form-group">
-            <label for="tableSelect">选择数据表，可进行多选：</label>
-            <select multiple="" class="form-control" id="tableSelect" style="height: 260px;">
-              {{range .}}
+  <div class="container-fluid p-t-15">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="card">
+          <header class="card-header">
+            <div class="card-title"> 生成数据表 CURD </div>
+          </header>
+          <div class="card-body">
+            <div class="form-group">
+              <div class="clear-both mb-3">
+                <label for="db" class="clear-both">选择数据库：</label>
+                <select class="form-control select-picker" data-width="auto" data-live-search="true" id="db">
+                </select>
+              </div>
+              <label for="tableSelect">选择数据表，可进行多选：</label>
+              <select multiple="" class="form-control" id="tableSelect" style="height: 260px;">
+                <!-- {{range .}}
                 <option value="{{ .Name }}">{{ .Name }} -- 备注：{{ .Comment }}</option>
-              {{end}}
-            </select>
+                {{end}} -->
+              </select>
+            </div>
+
+            <p>
+              <button type="button" id="btnOk" class="btn btn-primary">确认</button>
+              <button type="button" id="btnLoading" class="btn btn-primary" disabled style="display: none">
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                执行中...
+              </button>
+            </p>
+
           </div>
-
-          <p>
-            <button type="button" id="btnOk" class="btn btn-primary">确认</button>
-            <button type="button" id="btnLoading" class="btn btn-primary" disabled style="display: none">
-              <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-              执行中...
-            </button>
-          </p>
-
         </div>
       </div>
-    </div>
 
-    <div class="col-lg-6">
-      <div class="card">
-        <header class="card-header"><div class="card-title">执行结果</div></header>
-        <div class="card-body">
-          <pre id="resultDiv"></pre>
+      <div class="col-lg-6">
+        <div class="card">
+          <header class="card-header">
+            <div class="card-title">执行结果</div>
+          </header>
+          <div class="card-body">
+            <pre id="resultDiv"></pre>
+          </div>
         </div>
       </div>
-    </div>
 
+    </div>
   </div>
-</div>
 
-<script type="text/javascript" src="/assets/bootstrap/js/jquery.min.js"></script>
-<script type="text/javascript" src="/assets/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/assets/bootstrap/js/jquery-confirm/jquery-confirm.min.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $("#btnOk").click(function(){
-      var tables = [];
-      var options = $("#tableSelect").find("option:selected");
+  <script type="text/javascript" src="/assets/bootstrap/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/assets/bootstrap/js/popper.min.js"></script>
+  <script type="text/javascript" src="/assets/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/assets/bootstrap/js/jquery-confirm/jquery-confirm.min.js"></script>
+  <script type="text/javascript" src="/assets/bootstrap/js/httpclient/httpclient.js"></script>
+  <script type="text/javascript" src="/assets/bootstrap/js/bootstrap-select/bootstrap-select.min.js"></script>
+  <script type="text/javascript" src="/assets/bootstrap/js/bootstrap-select/i18n/defaults-zh_CN.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('.select-picker').selectpicker();
+      AjaxForm(
+        "GET",
+        "/api/tool/data/dbs",
+        "",
+        function () {
+        },
+        function (data) {
+          $.each(data.list, function (index, value) {
+            $("#db").append("<option value='" + value.db_name + "'>" + value.db_name + "</option>");
+          });
 
-      if (options.length < 1) {
-        $.alert({
-          title: '温馨提示',
-          icon: 'mdi mdi-alert',
-          type: 'orange',
-          content: '请选择数据表。',
-        });
-        return false;
+          $("#db option:eq(0)").attr('selected', 'selected');//选中第一个
+          $("#db").selectpicker('refresh');
+
+          getTables($('#db option:selected').val());
+        },
+        function (response) {
+          AjaxError(response);
+        }
+      );
+
+      function getTables(db_name) {
+        AjaxForm(
+          "POST",
+          "/api/tool/data/tables",
+          { db_name: db_name },
+          function () {
+          },
+          function (data) {
+            $("#tableSelect").html("");
+            $.each(data.list, function (index, value) {
+              $("#tableSelect").append("<option value='" + value.table_name + "' data-subtext='" + value.table_comment + "'>" + value.table_name + "---" + value.table_comment + "</option>");
+            });
+          },
+          function (response) {
+            AjaxError(response);
+          }
+        );
       }
 
-      $("#resultDiv").text("");
-      $(this).hide();
-      $("#btnLoading").show();
+      $("#db").on('change', function () {
+        getTables($(this).val());
+      });
 
-      for (var i = 0; i < options.length; i++) {
-        tables.push(options.eq(i).val()); // 将所有的值赋给数组
-      }
+      $("#btnOk").click(function () {
+        var tables = [];
+        var options = $("#tableSelect").find("option:selected");
 
-      $.post("/generator/gorm/execute",{tables:tables.join(',')},function (data) {
-        $("#resultDiv").text(data);
-        $("#btnLoading").hide();
-        $("#btnOk").show();
+        if (options.length < 1) {
+          $.alert({
+            title: '温馨提示',
+            icon: 'mdi mdi-alert',
+            type: 'orange',
+            content: '请选择数据表。',
+          });
+          return false;
+        }
+
+        $("#resultDiv").text("");
+        $(this).hide();
+        $("#btnLoading").show();
+
+        for (var i = 0; i < options.length; i++) {
+          tables.push(options.eq(i).val()); // 将所有的值赋给数组
+        }
+
+        $.post("/generator/gorm/execute", { db: $("#db").val(), tables: tables.join(',') }, function (data) {
+          $("#resultDiv").text(data);
+          $("#btnLoading").hide();
+          $("#btnOk").show();
+        })
+
       })
-
     })
-  })
-</script>
-<div style="display:none">
-  <script type="text/javascript">document.write(unescape("%3Cspan id='cnzz_stat_icon_1279911342'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279911342%26' type='text/javascript'%3E%3C/script%3E"));</script>
-</div>
+  </script>
+  <div style="display:none">
+    <script
+      type="text/javascript">document.write(unescape("%3Cspan id='cnzz_stat_icon_1279911342'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279911342%26' type='text/javascript'%3E%3C/script%3E"));</script>
+  </div>
 </body>
+
 </html>

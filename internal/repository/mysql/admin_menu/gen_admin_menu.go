@@ -31,8 +31,9 @@ func (t *AdminMenu) Create(db *gorm.DB) (id int32, err error) {
 }
 
 type adminMenuQueryBuilder struct {
-	order []string
-	where []struct {
+	fields []string
+	order  []string
+	where  []struct {
 		prefix string
 		value  interface{}
 	}
@@ -42,6 +43,9 @@ type adminMenuQueryBuilder struct {
 
 func (qb *adminMenuQueryBuilder) buildQuery(db *gorm.DB) *gorm.DB {
 	ret := db
+	if len(qb.fields) > 0 {
+		ret = ret.Select(qb.fields)
+	}
 	for _, where := range qb.where {
 		ret = ret.Where(where.prefix, where.value)
 	}
@@ -50,6 +54,11 @@ func (qb *adminMenuQueryBuilder) buildQuery(db *gorm.DB) *gorm.DB {
 	}
 	ret = ret.Limit(qb.limit).Offset(qb.offset)
 	return ret
+}
+
+func (qb *adminMenuQueryBuilder) Select(fields ...string) *adminMenuQueryBuilder {
+	qb.fields = append(qb.fields, fields...)
+	return qb
 }
 
 func (qb *adminMenuQueryBuilder) Updates(db *gorm.DB, m map[string]interface{}) (err error) {

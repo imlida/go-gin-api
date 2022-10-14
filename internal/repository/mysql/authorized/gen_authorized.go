@@ -31,8 +31,9 @@ func (t *Authorized) Create(db *gorm.DB) (id int32, err error) {
 }
 
 type authorizedQueryBuilder struct {
-	order []string
-	where []struct {
+	fields []string
+	order  []string
+	where  []struct {
 		prefix string
 		value  interface{}
 	}
@@ -42,6 +43,9 @@ type authorizedQueryBuilder struct {
 
 func (qb *authorizedQueryBuilder) buildQuery(db *gorm.DB) *gorm.DB {
 	ret := db
+	if len(qb.fields) > 0 {
+		ret = ret.Select(qb.fields)
+	}
 	for _, where := range qb.where {
 		ret = ret.Where(where.prefix, where.value)
 	}
@@ -50,6 +54,11 @@ func (qb *authorizedQueryBuilder) buildQuery(db *gorm.DB) *gorm.DB {
 	}
 	ret = ret.Limit(qb.limit).Offset(qb.offset)
 	return ret
+}
+
+func (qb *authorizedQueryBuilder) Select(fields ...string) *authorizedQueryBuilder {
+	qb.fields = append(qb.fields, fields...)
+	return qb
 }
 
 func (qb *authorizedQueryBuilder) Updates(db *gorm.DB, m map[string]interface{}) (err error) {

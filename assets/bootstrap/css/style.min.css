@@ -455,6 +455,11 @@ hr {
 .help-block {
     color: #737373;
 }
+.clear-both {
+    clear: both;
+    /* 单独一行 */
+    display: block;
+}
 
 /** ----------------------------------
  * 重置样式
